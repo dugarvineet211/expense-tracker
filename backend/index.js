@@ -1,4 +1,3 @@
-
 //BUILT-IN MODULES
 
 //INSTALLED MODULES
@@ -12,8 +11,6 @@ const User=require('./models/user');
 
 const app = express();
 app.use(cors());
-
-
 
 sequelize.sync()
     .then(() => {
