@@ -9,14 +9,14 @@ input{
     border-radius: 2px;
     box-sizing: border-box;
     border: 1px solid blueviolet;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 label{
     font-family: Arial, Helvetica, sans-serif;
     color: grey;
     font-weight: bold;
 }
-#signup-div{
+#login-div{
     background-color: lightgrey;
     border-radius: 10px;
     padding: 10px;
@@ -25,14 +25,7 @@ label{
     margin-right: 20%;
     margin-bottom: 10%;
 }
-h2{
-    text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
-    color: grey;
-    font-size: xx-large;
-    font-weight: bold;
-}
-#sub{
+#login{
     background-color: khaki;
     font-weight: bolder;
     font-size: 20px;
@@ -41,3 +34,28 @@ h2{
     display: inline-block;
     box-sizing: border-box;
 }
+#login:hover{
+    cursor: pointer;
+}
+
+h2{
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: grey;
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+#signup{
+    float: right;
+    background-color: khaki;
+    font-weight: bolder;
+    font-size: 20px;
+    margin: 10px;
+    padding: 10px 10px;
+    box-sizing: border-box;
+}
+#signup a:default{
+    color:black;
+}
+
