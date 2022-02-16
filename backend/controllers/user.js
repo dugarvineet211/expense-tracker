@@ -1,5 +1,6 @@
 const brcypt=require('bcrypt');
 const User=require('../models/user');
+const jwt=require('jsonwebtoken');
 
 exports.signup=(req,res,next)=>{
 
@@ -20,5 +21,36 @@ exports.signup=(req,res,next)=>{
                     res.status(403).json(err);
                 });
         });
+    });
+}
+
+function getAccessToken(id)
+{
+    return jwt.sign(id,process.env.TOKEN_SECRET);
+}
+
+exports.login=(req,res,next)=>{
+    const email=req.body.email;
+    const password=req.body.password;
+
+    User.findAll({where:{email}}).then(user=>{
+        if(user.length!=0)
+        {
+            brcypt.compare(password,user[0].password,function(err,response){
+                if(response)
+                {
+                    const jwttoken=getAccessToken(user[0].id);
+                    return res.status(200).json({token:jwttoken,success:true});
+                }
+                else
+                {
+                    return res.status(401).json({success:false});
+                }   
+            });
+        }
+        else
+        {
+            return res.status(404).json({success:false});
+        }
     });
 }
