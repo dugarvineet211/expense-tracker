@@ -12,8 +12,15 @@ document.getElementById('signup').addEventListener('click',(e)=>
         number:number.value,
         password:password.value,
     }
+
     
-    axios.post('http://localhost:3000/user/signup',userDetails)
-    .then(res=>console.log(res));
+    axios.post('http://localhost:3000/signup',userDetails)
+    .then((res)=>{
+        if(res.status===201)
+        alert(res.data.message);
+    })
+    .catch((err)=>{
+        alert('User exists! Please login!');
+    });
     
 });
