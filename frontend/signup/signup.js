@@ -17,7 +17,10 @@ document.getElementById('signup').addEventListener('click',(e)=>
     axios.post('http://localhost:3000/signup',userDetails)
     .then((res)=>{
         if(res.status===201)
+        {
         alert(res.data.message);
+        window.location.href='../login/login.html';
+        }
     })
     .catch((err)=>{
         alert('User exists! Please login!');
