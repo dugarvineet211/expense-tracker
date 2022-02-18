@@ -54,3 +54,9 @@ function deleteExpense(expenseId)
     document.getElementById(expenseId).remove();
 }
 
+function logout()
+{
+    localStorage.clear();
+    window.location.href='../login/login.html';
+}
+
