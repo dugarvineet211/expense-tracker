@@ -18,7 +18,7 @@ exports.signup=(req,res,next)=>{
                     res.status(201).json({success:true,message:'User successfully created! You may login now!'});
                 })
                 .catch((err)=>{
-                    res.status(403).json(err);
+                    res.status(403).json({success:false,message:'User exists! Please login!'});
                 });
         });
     });
@@ -40,17 +40,17 @@ exports.login=(req,res,next)=>{
                 if(response)
                 {
                     const jwttoken=getAccessToken(user[0].id);
-                    return res.status(200).json({token:jwttoken,success:true});
+                    return res.status(200).json({token:jwttoken,success:true,message:'Successfully Logged in!',user:user[0]});
                 }
                 else
                 {
-                    return res.status(401).json({success:false});
+                    return res.status(401).json({success:false,message:'Wrong Password!'});
                 }   
             });
         }
         else
         {
-            return res.status(404).json({success:false});
+            return res.status(404).json({success:false,message:'User does not exist! Please signup first!'});
         }
     });
 }

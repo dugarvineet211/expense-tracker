@@ -9,6 +9,7 @@ const dotenv = require('dotenv');
 //USER DEFINED MODULES
 const sequelize=require('./util/database');
 const User=require('./models/user');
+const Expense=require('./models/expenses');
 const userRoutes = require('./routes/user');
 
 dotenv.config();
@@ -17,6 +18,9 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.use(userRoutes);
+
+User.hasMany(Expense);
+Expense.belongsTo(User);
 
 sequelize.sync()
     .then(() => {

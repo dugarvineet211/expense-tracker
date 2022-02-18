@@ -18,12 +18,16 @@ document.getElementById('signup').addEventListener('click',(e)=>
     .then((res)=>{
         if(res.status===201)
         {
-        alert(res.data.message);
         window.location.href='../login/login.html';
         }
     })
     .catch((err)=>{
-        alert('User exists! Please login!');
+        alert(err.response.data.message);
     });
     
 });
+
+function redirectLogin()
+{
+    window.location.href='../login/login.html';
+}
