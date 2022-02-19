@@ -60,3 +60,42 @@ function logout()
     window.location.href='../login/login.html';
 }
 
+async function toPremium(e)
+{
+    const token = localStorage.getItem('token');
+    const response=await axios.get('http://localhost:3000/premiummembership', { headers: {"Authorization" : token} });
+    var options =
+    {
+     "key": response.data.key_id,
+     "name": "Test Company",
+     "order_id": response.data.order.id, 
+     "prefill": {
+       "name": "Test User",
+       "email": "test.user@example.com",
+       "contact": "7003442036"
+     },
+     "theme": {
+      "color": "#3399cc"
+     },
+     "handler": function (response) {
+         axios.post('http://localhost:3000/updatetransaction',{
+             order_id: options.order_id,
+             payment_id: response.razorpay_payment_id,
+         }, { headers: {"Authorization" : token} }).then(() => {
+             alert('You are a Premium User now')
+         }).catch(() => {
+             alert('Something went wrong! Try again!')
+         })
+     },
+  };
+
+  const rzp1 = new Razorpay(options);
+  rzp1.open();
+  e.preventDefault();
+
+  rzp1.on('payment.failed', function (response){
+  alert(response.error.description);
+ });
+
+}
+

@@ -4,6 +4,7 @@ exports.addExpense=(req,res,next)=>{
     const amount=req.body.amount;
     const description=req.body.description;
     const category=req.body.category;
+    console.log(req.body);
 
     req.user.createExpense({amount,description,category})
     .then(expense=>{
@@ -16,6 +17,7 @@ exports.addExpense=(req,res,next)=>{
 }
 
 exports.getAllExpenses=(req,res,next)=>{
+    console.log(req.body);
     req.user.getExpenses()
     .then(expenses=>{
         return res.status(200).json({expenses,success:true});
