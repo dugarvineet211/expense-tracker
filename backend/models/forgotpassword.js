@@ -2,7 +2,7 @@ const Sequelize=require('sequelize');
 const sequelize=require('../util/database');
 
 const ForgotPass=sequelize.define('forgotpassword',{
-    id:{
+    passwordId:{
         type:Sequelize.UUID,
         allowNull:false,
         isPrimaryKey:true

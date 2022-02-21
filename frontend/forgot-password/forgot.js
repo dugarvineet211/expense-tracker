@@ -14,6 +14,6 @@ function forgotpassword(e) {
             throw new Error('Something went wrong!!!')
         }
     }).catch(err => {
-        alert(err.response.data.message)
+        console.log(err);
     })
 }
