@@ -1,3 +1,4 @@
+const token=localStorage.getItem('token');
 function addNewExpense(e)
 {
     e.preventDefault();
@@ -21,7 +22,13 @@ function addNewExpense(e)
 }
 
 window.addEventListener('load',()=>{
-    const token=localStorage.getItem('token');
+
+    const userDetails_JSON=localStorage.getItem('userDetails');
+    const userDetails=JSON.parse(userDetails_JSON);
+    if(userDetails.isPremium===true)
+    {
+        document.getElementById('premium').remove();
+    }
     axios.get('http://localhost:3000/getexpense',{headers:{"Authorization":token}})
     .then(res=>{
         if(res.status===200)
@@ -34,13 +41,13 @@ function addExpense(expense)
 {
     const parent=document.getElementById('list');
     const liElementId=`${expense.expenseId}`
-    parent.innerHTML+=`<li id="${liElementId}">
-    ${expense.category} - ${expense.description} - ${expense.amount} <button id='delete' onclick="deleteNewExpense(event,${expense.expenseId})"> Delete Expense</button> </li>`;
+    parent.innerHTML+=`<tr id="${liElementId}">
+    <td>${expense.category}</td><td>${expense.description}</td><td>${expense.amount}</td><td><button id='delete' onclick="deleteNewExpense(event,${expense.expenseId})">Delete Expense</button></td></tr>`;
 }
 
 function deleteNewExpense(e,expenseId)
 {
-    const token=localStorage.getItem('token');
+    
     axios.delete(`http://localhost:3000/deleteexpense/${expenseId}`,{headers:{"Authorization" :token}})
     .then(res=>{
         if(res.status==201)
@@ -62,7 +69,6 @@ function logout()
 
 async function toPremium(e)
 {
-    const token = localStorage.getItem('token');
     const response=await axios.get('http://localhost:3000/premiummembership', { headers: {"Authorization" : token} });
     var options =
     {
@@ -91,7 +97,7 @@ async function toPremium(e)
 
   const rzp1 = new Razorpay(options);
   rzp1.open();
-  e.preventDefault();
+  //e.preventDefault();
 
   rzp1.on('payment.failed', function (response){
   alert(response.error.description);
