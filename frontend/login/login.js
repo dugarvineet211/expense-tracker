@@ -25,3 +25,7 @@ document.getElementById('login').addEventListener('click',(e)=>
         alert(err.response.data.message);
     });
 });
+
+function forgotpassword() {
+    window.location.href = "../forgot-password/index.html"
+}

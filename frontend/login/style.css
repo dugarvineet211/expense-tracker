@@ -46,7 +46,7 @@ h2{
     font-weight: bold;
 }
 
-#signup{
+#signup,#forgot-password{
     float: right;
     background-color: khaki;
     font-weight: bolder;
