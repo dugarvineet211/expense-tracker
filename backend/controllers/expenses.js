@@ -19,7 +19,7 @@ exports.addExpense=(req,res,next)=>{
 }
 
 exports.getAllExpenses=(req,res,next)=>{
-    console.log(req.body);
+
     req.user.getExpenses()
     .then(expenses=>{
         return res.status(200).json({expenses,success:true});
@@ -43,7 +43,7 @@ exports.deleteExpense=(req,res,next)=>{
 exports.downloadExpenses=async (req, res) => {
 
     try {
-        if(!req.user.isPremiumUser)
+        if(!req.user.isPremium)
         {
             return res.status(401).json({ success: false, message: 'User is not a premium User'})
         }

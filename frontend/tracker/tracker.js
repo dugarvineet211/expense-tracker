@@ -73,7 +73,7 @@ function download(){
     const userDetails=JSON.parse(userDetails_JSON);
     if(userDetails.isPremium===true)
     {
-    axios.get('http://localhost:3000/user/download', { headers: {"Authorization" : token} })
+    axios.get('http://localhost:3000/download', { headers: {"Authorization" : token} })
     .then((response) => {
         if(response.status === 201)
         {
@@ -88,7 +88,7 @@ function download(){
         }
     })
     .catch((err) => {
-        console.log(err);
+        console.log(err.response);
     });
 }
 }
