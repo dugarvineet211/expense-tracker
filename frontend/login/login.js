@@ -27,5 +27,5 @@ document.getElementById('login').addEventListener('click',(e)=>
 });
 
 function forgotpassword() {
-    window.location.href = "../forgot-password/index.html"
+    window.location.href = "../forgot-password/forgot.html"
 }

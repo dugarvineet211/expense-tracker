@@ -67,6 +67,36 @@ function logout()
     window.location.href='../login/login.html';
 }
 
+function download(){
+    
+    const userDetails_JSON=localStorage.getItem('userDetails');
+    const userDetails=JSON.parse(userDetails_JSON);
+    if(userDetails.isPremium===true)
+    {
+    axios.get('http://localhost:3000/user/download', { headers: {"Authorization" : token} })
+    .then((response) => {
+        if(response.status === 201)
+        {
+            var a = document.createElement("a");
+            a.href = response.data.fileUrl;
+            a.download = 'myexpense.csv';
+            a.click();
+        } 
+        else 
+        {
+            throw new Error(response.data.message)
+        }
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+}
+else
+{
+    alert('Please buy a Premium membership to download expense details!');
+}
+}
+
 async function toPremium(e)
 {
     const response=await axios.get('http://localhost:3000/premiummembership', { headers: {"Authorization" : token} });
@@ -97,7 +127,7 @@ async function toPremium(e)
 
   const rzp1 = new Razorpay(options);
   rzp1.open();
-  //e.preventDefault();
+  e.preventDefault();
 
   rzp1.on('payment.failed', function (response){
   alert(response.error.description);
