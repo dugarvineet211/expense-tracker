@@ -91,10 +91,6 @@ function download(){
         console.log(err);
     });
 }
-else
-{
-    alert('Please buy a Premium membership to download expense details!');
-}
 }
 
 async function toPremium(e)
