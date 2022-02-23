@@ -14,7 +14,7 @@ document.getElementById('signup').addEventListener('click',(e)=>
     }
 
     
-    axios.post('http://localhost:3000/signup',userDetails)
+    axios.post('https://localhost:3000/signup',userDetails)
     .then((res)=>{
         if(res.status===201)
         {

@@ -1,6 +1,7 @@
 //BUILT-IN MODULES
 const fs=require('fs');
 const path=require('path');
+const https=require('https');
 //INSTALLED MODULES
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -21,6 +22,8 @@ const purchaseRoutes=require('./routes/purchase');
 const resetPasswordRoutes=require('./routes/forgotpassword');
 
 const accessLogStream=fs.createWriteStream(path.join(__dirname,'access.log'),{flags:'a'});
+const privateKey=fs.readFileSync('server.key');
+const certificate=fs.readFileSync('server.cert');
 
 dotenv.config();
 const app = express();
@@ -46,7 +49,7 @@ ForgotPass.belongsTo(User);
 
 sequelize.sync()
     .then(() => {
-        app.listen(3000);
+        https.createServer({key:privateKey,cert:certificate},app).listen(3000);
     })
     .catch(err => {
         console.log(err);

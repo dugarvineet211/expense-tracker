@@ -10,7 +10,7 @@ document.getElementById('login').addEventListener('click',(e)=>
         password:password.value
     };
 
-    axios.post('http://localhost:3000/login',userDetails)
+    axios.post('https://localhost:3000/login',userDetails)
     .then(res=>{
        
         if(res.status===200)
@@ -22,7 +22,7 @@ document.getElementById('login').addEventListener('click',(e)=>
         }
     })
     .catch(err=>{
-        alert(err.response.data.message);
+        alert(err);
     });
 });
 

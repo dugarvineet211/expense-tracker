@@ -6,7 +6,9 @@ exports.addExpense=(req,res,next)=>{
     const amount=req.body.amount;
     const description=req.body.description;
     const category=req.body.category;
-    console.log(req.body);
+    
+
+    console.log(req.user);
 
     req.user.createExpense({amount,description,category})
     .then(expense=>{

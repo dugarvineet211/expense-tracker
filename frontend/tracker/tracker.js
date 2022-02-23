@@ -13,7 +13,7 @@ function addNewExpense(e)
         category:category.value
     }
     const token = localStorage.getItem('token');
-    axios.post('http://localhost:3000/addexpense',expenseDetails,{headers:{'Authorization':token}})
+    axios.post('https://localhost:3000/addexpense',expenseDetails,{headers:{'Authorization':token}})
     .then((res)=>{
         if(res.status===201)
         addExpense(res.data.expense);
@@ -29,7 +29,7 @@ window.addEventListener('load',()=>{
     {
         document.getElementById('premium').remove();
     }
-    axios.get('http://localhost:3000/getexpense',{headers:{"Authorization":token}})
+    axios.get('https://localhost:3000/getexpense',{headers:{"Authorization":token}})
     .then(res=>{
         if(res.status===200)
         res.data.expenses.forEach(expense=>{addExpense(expense)})
@@ -48,7 +48,7 @@ function addExpense(expense)
 function deleteNewExpense(e,expenseId)
 {
     
-    axios.delete(`http://localhost:3000/deleteexpense/${expenseId}`,{headers:{"Authorization" :token}})
+    axios.delete(`https://localhost:3000/deleteexpense/${expenseId}`,{headers:{"Authorization" :token}})
     .then(res=>{
         if(res.status==201)
         deleteExpense(expenseId);
@@ -73,7 +73,7 @@ function download(){
     const userDetails=JSON.parse(userDetails_JSON);
     if(userDetails.isPremium===true)
     {
-    axios.get('http://localhost:3000/download', { headers: {"Authorization" : token} })
+    axios.get('https://localhost:3000/download', { headers: {"Authorization" : token} })
     .then((response) => {
         if(response.status === 201)
         {
@@ -95,7 +95,7 @@ function download(){
 
 async function toPremium(e)
 {
-    const response=await axios.get('http://localhost:3000/premiummembership', { headers: {"Authorization" : token} });
+    const response=await axios.get('https://localhost:3000/premiummembership', { headers: {"Authorization" : token} });
     var options =
     {
      "key": response.data.key_id,
@@ -110,7 +110,7 @@ async function toPremium(e)
       "color": "#3399cc"
      },
      "handler": function (response) {
-         axios.post('http://localhost:3000/updatetransaction',{
+         axios.post('https://localhost:3000/updatetransaction',{
              order_id: options.order_id,
              payment_id: response.razorpay_payment_id,
          }, { headers: {"Authorization" : token} }).then(() => {
